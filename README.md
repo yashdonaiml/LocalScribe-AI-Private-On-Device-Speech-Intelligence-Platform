@@ -1,225 +1,174 @@
 # AI Transcript App
 
-A base for your portfolio piece to land your next AI engineering job.
-AI-powered voice transcription with Whisper and LLM cleaning. Browser-based recording interface with FastAPI backend.
-
-**📺 Recommended Video Tutorial:** For project structure and API details, watch the full tutorial on YouTube: https://youtu.be/WUo5tKg2lnE
+An AI-powered application for voice transcription with advanced cleaning capabilities. It features a browser-based recording interface, a robust FastAPI backend for processing, and is designed to be highly compatible with various Large Language Model (LLM) providers.
 
 ---
 
-## Branches
+## Features
 
-This repository uses checkpoint branches to progressively teach AI engineering concepts:
-
-| Branch | Description | Builds On | Learning Resource |
-|--------|-------------|-----------|-------------------|
-| `main` | Complete transcript app with Whisper + LLM cleaning (runs fully locally, beginner friendly) | — | [YouTube Tutorial](https://youtu.be/WUo5tKg2lnE) |
-| `checkpoint-1-fundamentals` | Exercise generation system for learning Python/TypeScript fundamentals | — | [Classroom](https://aiengineer.community/join) |
-| `checkpoint-agentic-openrouter` | Agentic workflow with autonomous tool selection | `main` | [Classroom](https://aiengineer.community/join) |
-| `checkpoint-pydanticai-openrouter` | PydanticAI framework for structured agent development | `checkpoint-agentic-openrouter` | [Classroom](https://aiengineer.community/join) |
-| `checkpoint-rest-mcp-openrouter` | MCP integration with REST API and GitHub Issues | `checkpoint-pydanticai-openrouter` | [Classroom](https://aiengineer.community/join) |
-
-> **Why "openrouter" in branch names?** These branches use [OpenRouter](https://openrouter.ai/) to access powerful cloud models that reliably support tool/function calling. Small local models struggle with agentic workflows.
-
-Switch branches with: `git checkout <branch-name>`
+- 🎤 **Browser-based Voice Recording:** Easily capture audio directly from your web browser.
+- 🔊 **English Whisper Speech-to-Text:** Utilizes the Whisper model for accurate, locally-run English speech-to-text transcription.
+- 🤖 **LLM-Powered Transcription Cleaning:** Leverages a Large Language Model to refine transcripts by removing filler words and correcting grammatical errors.
+- 🔌 **OpenAI API-Compatible:** Designed to work seamlessly with Ollama, LM Studio, OpenAI's API, or any other OpenAI-compatible API endpoints.
+- 📋 **One-Click Copy:** Quickly copy the processed transcription to your clipboard.
 
 ---
 
-**Features:**
+## Getting Started
 
-- 🎤 Browser-based voice recording
-- 🔊 English Whisper speech-to-text (runs locally)
-- 🤖 LLM cleaning (removes filler words, fixes errors)
-- 🔌 **OpenAI API-compatible** (works with Ollama, LM Studio, OpenAI, or any OpenAI-compatible API)
-- 📋 One-click copy to clipboard
-
-Note that the vanilla version uses a smaller language model running on your CPU.
-This means the AI may not listen to system prompts that well depending on the transcript.
-The challenge for you is to change this portfolio app to advance the solution and make it your own.
-
-For example:
-
-- Modify it for a specific industry
-- Add GPU acceleration + stronger local LLM
-- Use a cloud AI model
-- Real-time transcription/LLM streaming
-- Multi-language support beyond English
-
-**📚 Need help and want to learn more?**
-
-Full courses on AI Engineering are available at [https://aiengineer.community/join](https://aiengineer.community/join)
-
----
-
-## Quick Start
+This project prioritizes developer convenience through containerized environments.
 
 ### 🚀 Dev Container (Recommended)
 
-**This project is devcontainer-first. The easiest way to get started:**
+The project is configured for seamless development using VS Code Dev Containers.
 
-#### 1. Prerequisites
+#### Prerequisites
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - [VS Code](https://code.visualstudio.com/)
 - [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
-#### 2. Open in Dev Container
+#### Setup
 
-- Click **"Reopen in Container"** in VS Code
-- Or: `Cmd/Ctrl+Shift+P` → **"Dev Containers: Reopen in Container"**
-- Wait ~5-10 minutes for initial build and model download
+1.  Open the project in VS Code.
+2.  Follow the prompt to "Reopen in Container" or use `Cmd/Ctrl+Shift+P` and select "Dev Containers: Reopen in Container".
+3.  The initial build and model download may take 5-10 minutes.
 
-VS Code automatically:
+The Dev Container environment automatically:
+*   Builds and starts both the application and Ollama containers.
+*   Installs all necessary Python and Node.js dependencies.
+*   Downloads the default Ollama model.
+*   Creates a `backend/.env` file with functional default settings.
 
-1. Builds and starts both containers (app + Ollama)
-2. Installs Python and Node.js dependencies
-3. Downloads the Ollama model
-4. Creates `backend/.env` with working defaults
+### ☁️ Cloud Development Environments (e.g., GitHub Codespaces)
 
-Skip to [Running the App](#running-the-app).
+This project's Dev Container configuration is compatible with cloud-based development environments.
 
----
+#### Setup
 
-### ☁️ GitHub Codespaces (No Powerful PC Required)
+1.  Create a new Codespace for this repository.
+2.  Ensure your Codespace instance has adequate resources (4+ CPU cores recommended).
+3.  Allow 5-10 minutes for the initial setup.
 
-**Don't have a powerful PC?** GitHub Codespaces provides cloud-based development environments that work with this project's devcontainer.
+Upon readiness, ports 3000 (frontend), 8000 (backend), and 11434 (Ollama) will be automatically forwarded. Access the frontend via the provided URL for port 3000.
 
-#### 1. Create a Codespace
-
-- Go to the [repository on GitHub](https://github.com/AI-Engineer-Skool/local-ai-transcript-app)
-- Click the green **"Code"** button → **"Codespaces"** tab → **"Create codespace on main"**
-- The devcontainer enforces at least **4-core**, but if you can select more cores and RAM please do so.
-- Wait ~5-10 minutes for initial setup
-
-#### 2. Access the App
-
-The devcontainer automatically configures everything. Once ready:
-
-- Ports are auto-forwarded (you'll see notifications for ports 3000, 8000, 11434)
-- Click the port 3000 link or go to the **"Ports"** tab to access the frontend
-
-#### 3. For Localhost-Dependent Code
-
-If you need true `localhost` access (some code expects `localhost:8000`):
-
-1. Install the [GitHub Codespaces extension](https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces) in VS Code Desktop
-2. Connect to your running Codespace from VS Code Desktop
-3. Ports will forward to your actual `localhost`
-
-> **💡 Tip:** Stop your Codespace when not in use to conserve free hours. Go to [github.com/codespaces](https://github.com/codespaces) to manage active instances.
-
-> **📺 Video Guide:** Watch the [GitHub Codespaces setup tutorial](https://youtu.be/KkV1O-rXntM) for a walkthrough.
-
-> **🔄 Other Platforms:** Any cloud platform supporting devcontainers (Gitpod, DevPod, etc.) can also be used with this repository's `.devcontainer` configuration.
-
----
+For local `localhost` access to forwarded ports (e.g., for `localhost:8000`), connect to your Codespace from a VS Code Desktop instance with the GitHub Codespaces extension installed.
 
 ### 🛠️ Manual Installation
 
-The devcontainer is the easiest supported setup method for beginners.
-If you choose to install manually, you'll need:
+For users preferring a local setup without containers:
 
-- Python 3.12+, Node.js 24+, [uv](https://docs.astral.sh/uv/), and an LLM server ([Ollama](https://ollama.com/) or [LM Studio](https://lmstudio.ai/))
-- Copy `backend/.env.example` to `backend/.env` and configure
-- Install dependencies with `uv sync` (backend) and `npm install` (frontend)
-- Start your LLM server and pull models: `ollama pull llama3.1:8b`
+#### Prerequisites
 
-**For detailed setup, use the devcontainer above.**
+-   Python 3.12+
+-   Node.js 24+
+-   [uv package manager](https://docs.astral.sh/uv/)
+-   An LLM server such as [Ollama](https://ollama.com/) or [LM Studio](https://lmstudio.ai/)
+
+#### Setup
+
+1.  Copy `backend/.env.example` to `backend/.env` and configure your LLM settings.
+2.  Install backend dependencies:
+    ```bash
+    cd backend
+    uv sync
+    ```
+3.  Install frontend dependencies:
+    ```bash
+    cd frontend
+    npm install
+    ```
+4.  Start your chosen LLM server and pull the desired model (e.g., `ollama pull llama3.1:8b`).
 
 ---
 
-## Running the App
+## Running the Application
 
-Open **two terminals** and run:
+To run the application, open two separate terminal instances:
 
 **Terminal 1 - Backend:**
-
 ```bash
 cd backend
 uv sync && uv run uvicorn app:app --reload --host 0.0.0.0 --port 8000 --timeout-keep-alive 600
 ```
-
-> **Note:** `uv sync` ensures dependencies are up-to-date (useful after switching branches).`--timeout-keep-alive 600` sets a 10-minute timeout for long audio processing.
+> **Note:** The `--timeout-keep-alive 600` flag sets a 10-minute timeout, accommodating longer audio processing times.
 
 **Terminal 2 - Frontend:**
-
 ```bash
 cd frontend
 npm install && npm run dev
 ```
 
-> **Note:** `npm install` ensures dependencies are up-to-date (useful after switching branches).
-
-**Browser:** Open `http://localhost:3000`
+Once both servers are running, access the application in your web browser at `http://localhost:3000`.
 
 ---
 
 ## Configuration
 
-### OpenAI API Compatibility
+The application is designed for compatibility with any OpenAI API-format LLM provider.
 
-**This app is compatible with any OpenAI API-format LLM provider:**
+The Dev Container environment automatically configures `backend/.env` with Ollama defaults. To use an alternative provider, modify the `backend/.env` file with your specific API details:
 
-- **Ollama** (default - works out of the box in devcontainer)
-- **LM Studio** (local alternative)
-- **OpenAI API** (cloud-based)
-- Any other OpenAI-compatible API
-
-The devcontainer automatically creates `backend/.env` with working Ollama defaults. **No configuration needed to get started.**
-
-To use a different provider, edit `backend/.env`:
-
-- `LLM_BASE_URL` - API endpoint
-- `LLM_API_KEY` - API key
-- `LLM_MODEL` - Model name
+-   `LLM_BASE_URL`: The API endpoint of your LLM provider.
+-   `LLM_API_KEY`: Your API key (if required by the provider).
+-   `LLM_MODEL`: The name of the LLM model to be used.
 
 ---
 
 ## Troubleshooting
 
-**Container won't start or is very slow:**
+### Container Startup and Performance Issues
 
-⚠️ **This app runs an LLM on CPU and requires adequate Docker resources.**
+**Symptom:** The container is slow to start or perform, especially when running the LLM.
+**Cause:** LLMs running on CPU require substantial system resources.
+**Solution:** Configure Docker Desktop to allocate sufficient CPU and memory:
+1.  Open **Docker Desktop** → **Settings** → **Resources**.
+2.  Set **CPUs** to the maximum available (8+ cores recommended).
+3.  Set **Memory** to at least 16GB.
+4.  Click **Apply & Restart**.
+**Note:** Faster CPUs and more RAM directly improve LLM response times.
 
-Configure Docker Desktop resources:
+### Microphone Not Working
 
-1. Open **Docker Desktop** → **Settings** → **Resources**
-2. Set **CPUs** to maximum available (8+ cores recommended)
-3. Set **Memory** to at least 16GB
-4. Click **Apply & Restart**
+**Symptom:** The browser-based recording function does not detect audio input.
+**Solution:**
+*   Use a compatible browser (e.g., Chrome or Firefox; Safari may have known issues).
+*   Verify that your browser has microphone permissions enabled in its settings.
 
-**Expected specs:** Modern laptop/desktop with 8+ CPU cores and 16GB RAM. More CPU = faster LLM responses.
+### Backend Startup Failures
 
-**Microphone not working:**
+**Symptom:** The FastAPI backend server fails to start.
+**Solution:**
+*   Check for Whisper model download issues in `~/.cache/huggingface/`.
+*   Ensure your system has sufficient disk space for model downloads (models are approximately 150MB).
 
-- Use Chrome or Firefox (Safari may have issues)
-- Check browser permissions: Settings → Privacy → Microphone
+### LLM Errors
 
-**Backend fails to start:**
+**Symptom:** The LLM cleaning process encounters errors.
+**Solution:**
+*   Confirm that your chosen LLM service (e.g., Ollama) is actively running.
+*   Verify that the required LLM model has been successfully downloaded. (Models are automatically downloaded during Dev Container setup).
+*   Note that the transcription functionality (raw Whisper output) will still work even if the LLM cleaning fails.
 
-- Check Whisper model downloads: `~/.cache/huggingface/`
-- Ensure enough disk space (models are ~150MB)
+### Slow LLM Responses
 
-**LLM errors:**
+**Symptom:** The LLM cleaning process takes an extended amount of time.
+**Solution:**
+*   Review Docker resource allocation (refer to "Container Startup and Performance Issues" above).
+*   **Alternative Models:** Consider switching to a smaller, faster LLM model by editing `LLM_MODEL` in `backend/.env`. Be aware this may involve a trade-off in transcription cleaning quality.
+*   **Cloud APIs:** For optimal speed and quality, consider utilizing a cloud-based LLM API (e.g., OpenAI) by configuring `backend/.env` accordingly.
 
-- Make sure Ollama service is running (it auto-starts with devcontainer)
-- Check model is downloaded: Model downloads automatically during devcontainer setup
-- Transcription still works without LLM (raw Whisper only)
+### Cannot Access Localhost Ports (3000 or 8000)
 
-**LLM is slow:**
+**Symptom:** The application is unreachable via `localhost` from your host machine.
+**Solution:**
+*   **Docker Desktop Configuration:** In Docker Desktop, navigate to **Settings** → **Resources** → **Network**.
+*   Enable **"Use host networking"** (a Docker Desktop restart may be required).
+*   Restart both the frontend and backend servers after making this change.
 
-- See "Container won't start or is very slow" section above for Docker resource configuration
-- **Fallback option:** Switch to another model (edit `LLM_MODEL` in `backend/.env`)
-  - ⚠️ **Trade-off:** 3b is faster but **significantly worse at cleaning transcripts**
-- **Best alternative:** Use a cloud API like OpenAI for instant responses with excellent quality (edit `.env`)
+### Port Already in Use
 
-**Cannot access localhost:3000 or localhost:8000 from host machine:**
-
-- **Docker Desktop:** Go to **Settings** → **Resources** → **Network**
-- Enable **"Use host networking"** (may require Docker Desktop restart)
-- Restart the frontend and backend servers
-
-**Port already in use:**
-
-- Backend: Change port with `--port 8001`
-- Frontend: Edit `vite.config.js`, change `port: 3000`
+**Symptom:** Either the backend or frontend server fails to start due to a port conflict.
+**Solution:**
+*   **Backend:** Change the backend port by adding `--port <new_port_number>` (e.g., `--port 8001`) to the `uvicorn` command.
+*   **Frontend:** Modify the `port` setting within the `vite.config.js` file to an available port.

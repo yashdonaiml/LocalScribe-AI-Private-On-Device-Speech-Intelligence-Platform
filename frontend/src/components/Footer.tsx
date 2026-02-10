@@ -3,14 +3,14 @@ import styles from './Footer.module.css';
 export function Footer() {
   return (
     <footer className={styles.footer}>
-      <p className={styles.text}>Want to build AI apps like this?</p>
+      <p className={styles.text}>Want to connect?</p>
       <a
-        href="https://www.skool.com/ai-engineer/about"
+        href="https://www.linkedin.com/in/yaswanthkumard/"
         target="_blank"
         rel="noopener noreferrer"
         className={styles.link}
       >
-        Join the AI-Native Engineer community →
+        Add me on LinkedIn →
       </a>
     </footer>
   );
